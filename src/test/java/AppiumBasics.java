@@ -1,6 +1,3 @@
-package org.example;
-
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.testng.annotations.Test;
@@ -22,7 +19,7 @@ public class AppiumBasics {
 
         UiAutomator2Options options = new UiAutomator2Options();
         options.setDeviceName("Android");
-        options.
+        options.setApp()
 
         AndroidDriver driver = new AndroidDriver(urlAppium, null);
         System.out.printf("");
