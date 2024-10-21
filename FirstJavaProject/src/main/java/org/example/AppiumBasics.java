@@ -25,6 +25,7 @@ public class AppiumBasics {
         options.
 
         AndroidDriver driver = new AndroidDriver(urlAppium, null);
+        System.out.printf("");
 
     }
 }
