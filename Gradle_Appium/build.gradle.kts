@@ -20,6 +20,10 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-java:4.25.0")
 }
 
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8" // Устанавливаем кодировку UTF-8 для компиляции
+}
+
 tasks.test {
     useTestNG() // Измените на useTestNG()
 }

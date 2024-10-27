@@ -21,12 +21,14 @@ public class Test {
     AndroidDriver driver;
 
     URL urlAppium;
-    String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    //String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
     String ipAddress = "127.0.0.1";
     int usingPort = 4723;
+    //String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
+    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
     String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
-
+    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
 
 
     @BeforeClass
@@ -39,8 +41,7 @@ public class Test {
         }
         //service.stop();
         service.start(); // Запускаем сервер Appium
-
-        System.out.println("@BeforeClass");
+        System.out.println("@BeforeClass: Начал работу appium server");
 
     }
 
@@ -57,8 +58,8 @@ public class Test {
         options.setDeviceName(deviceName);
         options.setApp(setApp);
 
+        System.out.println("@BeforeSuite: Начал работу android driver UiAutomator2Options");
 
-        System.out.println("@BeforeSuite");
     }
 
     @org.testng.annotations.Test
@@ -68,8 +69,17 @@ public class Test {
 
     }
 
-    @AfterTest
+    @AfterSuite
     public void afterSuite() {
+        if (service != null) {
+            service.stop();
+        }
+        System.out.println("@AfterSuite: Завершил работу appium server");
+    }
+
+    @AfterClass
+    public void afterClass() {
+
         if (driver != null) {
             try {
                 Thread.sleep(2000);
@@ -77,15 +87,7 @@ public class Test {
                 throw new RuntimeException(e);
             }
             driver.quit();
-            System.out.println("@AfterSuite");
+            System.out.println("@AfterClass: Завершил работу android driver UiAutomator2Options");
         }
-    }
-
-    @AfterClass
-    public void afterClass() {
-        if (service != null) {
-            service.stop();
-        }
-        System.out.println("@AfterClass");
     }
 }
