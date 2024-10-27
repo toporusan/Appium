@@ -88,6 +88,7 @@ public class Test {
             }
             driver.quit();
             System.out.println("@AfterClass: Завершил работу android driver UiAutomator2Options");
+            System.out.println("@AfterClass: Завершил работу android driver UiAutomator2Options");
         }
     }
 }
