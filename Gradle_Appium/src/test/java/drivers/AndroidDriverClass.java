@@ -75,7 +75,7 @@ public class AndroidDriverClass {
     public void stopAppiumDriverLocalService() {
         if (service != null) {
             service.stop();
-            System.out.println("Завершил работу stopAppiumDriverLocalService");
+            System.out.println("Завершил работу stopAppiumDriverLocalService в");
         }
     }
 }
