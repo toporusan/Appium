@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+
 <suite name="All Test Suite">
     <test name="C:/Users/v.sultanov/0_D_Disk/Projects/untitled" preserve-order="true" verbose="2">
         <classes />
     </test>
+
 </suite>
+

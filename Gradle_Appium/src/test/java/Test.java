@@ -1,9 +1,12 @@
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
+import drivers.AndroidDriverClass;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
@@ -14,81 +17,54 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLOutput;
 
-public class Test {
-
-    AppiumDriverLocalService service;
-    UiAutomator2Options options;
-    AndroidDriver driver;
-
-    URL urlAppium;
-    //String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String ipAddress = "127.0.0.1";
-    int usingPort = 4723;
-    //String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
-    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+public class Test extends AndroidDriverClass {
 
 
-    @BeforeClass
-    public void beforeClass() {
-        service = new AppiumServiceBuilder().withAppiumJS(new File(mainJsPathWindows))
-                .withIPAddress(ipAddress).usingPort(usingPort).build();
-
-        if (service.isRunning()) {
-            service.stop();
-        }
-        //service.stop();
-        service.start(); // Запускаем сервер Appium
-        System.out.println("@BeforeClass: Начал работу appium server");
-
-    }
-
-    @BeforeSuite
-    public void testConfigurations() {
-        try {
-            urlAppium = new URL("http://127.0.0.1:4723");
-            System.out.println(urlAppium);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-
-        options = new UiAutomator2Options();
-        options.setDeviceName(deviceName);
-        options.setApp(setApp);
-
-        System.out.println("@BeforeSuite: Начал работу android driver UiAutomator2Options");
-
-    }
-
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(priority = 1)
     public void appiumTest() {
-        driver = new AndroidDriver(urlAppium, options);
-        System.out.println(" TEST 1 ------------>>>>> Ваши тесты...");
+
+        WebElement el1 = driver.findElement(AppiumBy.accessibilityId("Preference"));
+        el1.click();
+        WebElement el2 = driver.findElement(AppiumBy.accessibilityId("9. Switch"));
+        el2.click();
+        WebElement el3 = driver.findElement(AppiumBy.id("android:id/checkbox"));
+        el3.click();
+        WebElement el4 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"android:id/switch_widget\").instance(0)"));
+        el4.click();
+        WebElement el5 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"android:id/switch_widget\").instance(1)"));
+        el5.click();
 
     }
 
-    @AfterSuite
-    public void afterSuite() {
-        if (service != null) {
-            service.stop();
-        }
-        System.out.println("@AfterSuite: Завершил работу appium server");
+    @org.testng.annotations.Test(priority = 2)
+    public void appiumTest2() {
+
+        WebElement el1 = driver.findElement(AppiumBy.accessibilityId("Preference"));
+        el1.click();
+        WebElement el2 = driver.findElement(AppiumBy.accessibilityId("9. Switch"));
+        el2.click();
+        WebElement el3 = driver.findElement(AppiumBy.id("android:id/checkbox"));
+        el3.click();
+        WebElement el4 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"android:id/switch_widget\").instance(0)"));
+        el4.click();
+        WebElement el5 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"android:id/switch_widget\").instance(1)"));
+        el5.click();
+
     }
 
-    @AfterClass
-    public void afterClass() {
-
-        if (driver != null) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            driver.quit();
-            System.out.println("@AfterClass: Завершил работу android driver UiAutomator2Options");
-
-        }
+    @org.testng.annotations.Test(priority = 2)
+    public void wifiSettingsName() {
+        var el1 = driver.findElement(AppiumBy.accessibilityId("Graphics"));
+        el1.click();
+        var el2 = driver.findElement(AppiumBy.accessibilityId("CameraPreview"));
+        el2.click();
+        var el3 = driver.findElement(AppiumBy.accessibilityId("NFC"));
+        el3.click();
+        var el4 = driver.findElement(AppiumBy.accessibilityId("ForegroundDispatch"));
+        el4.click();
+        var el5 = driver.findElement(AppiumBy.id("android:id/aerr_close"));
+        el5.click();
     }
+
+
 }
