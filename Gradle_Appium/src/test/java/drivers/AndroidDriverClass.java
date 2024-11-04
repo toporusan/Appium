@@ -2,11 +2,9 @@ package drivers;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -75,7 +73,7 @@ public class AndroidDriverClass {
     public void stopAppiumDriverLocalService() {
         if (service != null) {
             service.stop();
-            System.out.println("Завершил работу stopAppiumDriverLocalService в");
+            System.out.println("Завершил работу stopAppiumDriverLocalService");
         }
     }
 }
