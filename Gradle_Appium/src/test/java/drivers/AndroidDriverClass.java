@@ -39,7 +39,6 @@ public class AndroidDriverClass {
     public void configureDriver() {
         service = new AppiumServiceBuilder().withAppiumJS(new File(mainJsPathWindows))
                 .withIPAddress(ipAddress).usingPort(usingPort).build();
-
         if (service.isRunning()) {
             service.stop();
         }
@@ -54,6 +53,7 @@ public class AndroidDriverClass {
             options = new UiAutomator2Options();
             options.setDeviceName(deviceName);
             options.setApp(setApp);
+
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
             System.out.println("@BeforeMethod: Начал работу android driver UiAutomator2Options");
         } catch (MalformedURLException e) {
