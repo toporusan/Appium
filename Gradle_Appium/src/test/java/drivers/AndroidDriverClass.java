@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.Duration;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -23,14 +24,14 @@ public class AndroidDriverClass {
     public URL urlAppium;
 
     // Home
-    /*String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
     String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";*/
+    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
 
     // Work
-    String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+    //String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    //String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
+    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
 
     String ipAddress = "127.0.0.1";
     int usingPort = 4723;
@@ -55,6 +56,7 @@ public class AndroidDriverClass {
             options.setApp(setApp);
 
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             System.out.println("@BeforeMethod: Начал работу android driver UiAutomator2Options");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
