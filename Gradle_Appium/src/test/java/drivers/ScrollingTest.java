@@ -1,14 +1,8 @@
 package drivers;
 
-import com.google.common.collect.ImmutableMap;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import io.appium.java_client.AppiumBy;
 
 public class ScrollingTest extends AndroidDriverClass{
@@ -20,6 +14,7 @@ public class ScrollingTest extends AndroidDriverClass{
 
         WebElement el2 = scrollToElementByText("WebView");
         el2.click();
+        //el2.click();
 
     }
     
