@@ -15,7 +15,7 @@ public class SwipeDemo extends AndroidDriverClass{
 
         WebElement el2 = scrollToElementByText("WebView");
         el2.click();
-        //el2.click();
+
 
     }
     
