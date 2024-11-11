@@ -3,12 +3,13 @@ package drivers;
 
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
 import io.appium.java_client.AppiumBy;
 
-public class ScrollingTest extends AndroidDriverClass{
+public class SwipeDemo extends AndroidDriverClass{
 
     @Test
-    public void scrolling() {
+    public void swipeDemoTest() {
         WebElement el1 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Views\")"));
         el1.click();
 
