@@ -95,7 +95,7 @@ public class AndroidDriverClass {
     public void stopDriver() {
         if (driver != null) {
             driver.quit(); // Завершение сессии драйвера
-            System.out.println("Завершил работу android driver AndroidDriver");
+            System.out.println("@AfterMethod: Завершил работу android driver AndroidDriver");
         }
     }
 
@@ -103,7 +103,7 @@ public class AndroidDriverClass {
     public void stopAppiumDriverLocalService() {
         if (service != null) {
             service.stop();
-            System.out.println("Завершил работу stopAppiumDriverLocalService +");
+            System.out.println("@AfterClass: Завершил работу stopAppiumDriverLocalService +");
         }
     }
 
@@ -133,17 +133,21 @@ public class AndroidDriverClass {
                 "elementId", ((RemoteWebElement) element).getId(),
                 "duration", duration
         ));
-
     }
 
-    // Скролл посредством androidUIAutomator метод UiScrollable
-    public void scrollToElement(WebElement element) {
-        String text = element.getText(); // Получаем текст из элемента
-        // Формируем строку для прокрутки до элемента с нужным текстом
+
+    // Скролл до конкретного элемента, посредством androidUIAutomator метод UiScrollable
+    public WebElement scrollToElementByText(String text) {
+        // Формируем строку для прокрутки до элемента с заданным текстом
         String uiScrollableString = String.format("new UiScrollable(new UiSelector()).scrollIntoView(text(\"%s\"))", text);
-        // Прокручиваем и находим элемент
+
+        // Прокручиваем экран до нужного элемента
         driver.findElement(AppiumBy.androidUIAutomator(uiScrollableString));
+        // Теперь ждем, пока элемент появится на экране
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"" + text + "\")")));
     }
+
 
     // Скролл посредством JavascriptExecutor
     public void scroll_JavascriptExecutor(String direction, double percent, int left, int top) {
@@ -161,17 +165,7 @@ public class AndroidDriverClass {
 
 
 
-    public WebElement scrollToElementByText(String text) {
-        // Формируем строку для прокрутки до элемента с заданным текстом
-        String uiScrollableString = String.format("new UiScrollable(new UiSelector()).scrollIntoView(text(\"%s\"))", text);
 
-        // Прокручиваем экран до нужного элемента
-        driver.findElement(AppiumBy.androidUIAutomator(uiScrollableString));
-
-        // Теперь ждем, пока элемент появится на экране
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        return wait.until(ExpectedConditions.presenceOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"" + text + "\")")));
-    }
 
 }
 
