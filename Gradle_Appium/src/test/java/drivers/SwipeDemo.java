@@ -22,6 +22,7 @@ public class SwipeDemo extends AndroidDriverClass {
         Assert.assertEquals(driver.findElement(By.xpath("//android.widget.ImageView[1]"))
                 .getAttribute("focusable"), "true"
         );
+        findElementCoordination(el4);
 
         swipeToEllement(el4, "LEFT", 2000);
 
