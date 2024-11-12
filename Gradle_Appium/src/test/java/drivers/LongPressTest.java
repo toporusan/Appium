@@ -20,7 +20,7 @@ public class LongPressTest extends AndroidDriverClass{
         WebElement el3 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"1. Custom Adapter\")"));
         el3.click();
         WebElement el4 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"People Names\")"));
-        longClickAction_JavascriptExecutor(el4,3000);
+        longClick_JavascriptExecutor(el4,3000);
         WebElement el5 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().text(\"Sample menu\")"));
         String sampleMenuText = el5.getText();
         Assert.assertTrue( el5.isDisplayed(),"is not present");

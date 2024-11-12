@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+
+<suite name="All Test Suite">
+    <test name="C:/Users/v.sultanov/0_D_Disk/Projects/untitled" preserve-order="true" verbose="2">
+        <classes>
+ <!--           <class name="Test" >
+                <methods>
+                    <include name="appiumTest3()" />
+                    <include name="appiumTest4()" />
+                </methods>
+            </class>
+
+            <class name="drivers.ScrollDemo" />
+            <class name="drivers.LongPressTest" />-->
+            <class name="drivers.SwipeDemo" />
+
+        </classes>
+    </test>
+
+</suite>
+
+
+
+
+
+
+<!--
+
+&lt;!&ndash; Первый тестовый сьют &ndash;&gt;
+<suite name="Suite1" verbose="2" preserve-order="true">
+    &lt;!&ndash; Первый тест в сьюте &ndash;&gt;
+    <test name="Test Group 1 - Suite1" verbose="2">
+        <classes>
+            <class name="package1.FirstTestClass" />
+            <class name="package1.SecondTestClass" />
+        </classes>
+    </test>
+
+    &lt;!&ndash; Второй тест в сьюте &ndash;&gt;
+    <test name="Test Group 2 - Suite1" verbose="2">
+        <classes>
+            <class name="package2.ThirdTestClass">
+                &lt;!&ndash; Запуск конкретных методов теста из класса &ndash;&gt;
+                <methods>
+                    <include name="testMethodA" />
+                    <include name="testMethodB" />
+                </methods>
+            </class>
+            <class name="package2.FourthTestClass">
+                <methods>
+                    <include name="testMethodC" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+
+&lt;!&ndash; Второй тестовый сьют &ndash;&gt;
+<suite name="Suite2" verbose="2" preserve-order="true">
+    <test name="Test Group 1 - Suite2" verbose="2">
+        <classes>
+            <class name="package3.FifthTestClass">
+                <methods>
+                    <include name="testMethodD" />
+                    <include name="testMethodE" />
+                </methods>
+            </class>
+            <class name="package3.SixthTestClass" />
+        </classes>
+    </test>
+
+    <test name="Test Group 2 - Suite2" verbose="2">
+        <classes>
+            <class name="package4.SeventhTestClass" />
+            <class name="package4.EighthTestClass">
+                <methods>
+                    <include name="testMethodF" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+
+</suite>
+-->

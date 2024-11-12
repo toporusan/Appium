@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -128,7 +129,7 @@ public class AndroidDriverClass {
     */
 
     // Долгий клик(зажатие)
-    public void longClickAction_JavascriptExecutor(WebElement element, int duration) {
+    public void longClick_JavascriptExecutor(WebElement element, int duration) {
         ((JavascriptExecutor) driver).executeScript("mobile: longClickGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
                 "duration", duration
@@ -143,6 +144,7 @@ public class AndroidDriverClass {
 
         // Прокручиваем экран до нужного элемента
         driver.findElement(AppiumBy.androidUIAutomator(uiScrollableString));
+
         // Теперь ждем, пока элемент появится на экране
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.presenceOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"" + text + "\")")));
@@ -157,16 +159,70 @@ public class AndroidDriverClass {
 
         boolean canScrollMore = (Boolean) ((JavascriptExecutor) driver)
                 .executeScript("mobile: scrollGesture", ImmutableMap.of(
-                "left", left, "top", top, "width", screenWidth, "height", screenHeight / 2,
-                "direction", direction,
-                "percent", percent
-        ));
+                        "left", left, "top", top, "width", screenWidth, "height", screenHeight / 2,
+                        "direction", direction,
+                        "percent", percent
+                ));
     }
 
+    public void findElementCoordination(WebElement element) {
+        // Получить координаты
+        Point location = element.getLocation();
+        int x = location.getX();
+        int y = location.getY();
 
+        // Получить размеры элемента
+        Dimension size = element.getSize();
+        int width = size.getWidth();
+        int height = size.getHeight();
 
+        // Использовать эти данные для свайпа
+        System.out.println("X: " + x + " Y: " + y);
+        System.out.println("Width: " + width + " Height: " + height);
+    }
 
+    // Свайп посредством JavascriptExecutor
+    public void swipeToEllement (WebElement element, String direction,  int speed) {
+        ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement) element).getId(),
+                "direction", direction,
+                "percent", 0.75,
+                "speed", speed
+        ));
+
+    }
+
+    // Свайп посредством JavascriptExecutor / много свайпов по заданным координатам
+    public void swipe_JavascriptExecutor(WebElement element, String direction, int swipeCount, int speed) {
+        Point location = element.getLocation();
+        int x = location.getX();
+        int y = location.getY();
+
+        // Получить размеры элемента
+        Dimension size = element.getSize();
+        int width = size.getWidth();
+        int height = size.getHeight();
+
+        int swipes = 0;
+        do {
+            ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
+                    "left", x,               // Начало области по X
+                    "top", y,               // Начало области по Y
+                    "width", width,             // Ширина области
+                    "height", height,            // Высота области
+                    "direction", direction,      // Направление свайпа (влево)
+                    "percent", 0.75,          // Процент от области
+                    "speed", speed             // Скорость свайпа
+            ));
+
+            swipes++;
+        } while (swipes < swipeCount - 1);
+
+    }
 
 }
+
+
+
 
 
