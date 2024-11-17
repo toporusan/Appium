@@ -33,14 +33,20 @@ public class AndroidDriverClass {
     public AndroidDriver driver; // AndroidDriver драйвер
     public URL urlAppium;
 
+
     // Home
-    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+//    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+//    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
+//    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+
+    // Mac
+    String mainJsPathWindows = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
+    String deviceName = "emulator-5554";
+    String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
 
     // Work
     //String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    //String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
+    //String deviceName = "emulator-5554";
     //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
 
     String ipAddress = "127.0.0.1";
@@ -51,11 +57,12 @@ public class AndroidDriverClass {
         service = new AppiumServiceBuilder().withAppiumJS(new File(mainJsPathWindows))
                 .withIPAddress(ipAddress)
                 .usingPort(usingPort)
-                .withArgument(() -> "--log-level", "warn") // Устанавливаем уровень логирования на "warn"
+                .withArgument(() -> "--log-level", "debug") // Устанавливаем уровень логирования на "warn"
                 .build();
         if (service.isRunning()) {
             service.stop();
         }
+
         service.start(); // Запускаем сервер Appium
         System.out.println("@BeforeClass: Начал работу appium server");
     }
@@ -78,9 +85,11 @@ public class AndroidDriverClass {
     public void initDriver() {
         try {
             urlAppium = new URL("http://127.0.0.1:4723");
+
             options = new UiAutomator2Options();
             options.setDeviceName(deviceName);
             options.setApp(setApp);
+            options.setAutomationName("UiAutomator2");
 
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

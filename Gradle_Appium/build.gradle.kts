@@ -17,7 +17,8 @@ dependencies {
 
     testImplementation("org.testng:testng:7.10.2")
     implementation("io.appium:java-client:9.3.0")
-    implementation("org.seleniumhq.selenium:selenium-java:4.25.0")
+    implementation("org.seleniumhq.selenium:selenium-java:4.26.0")
+
 }
 
 tasks.withType<JavaCompile> {
