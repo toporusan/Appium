@@ -4,7 +4,7 @@
 <suite name="All Test Suite">
     <test name="C:/Users/v.sultanov/0_D_Disk/Projects/untitled" preserve-order="true" verbose="2">
         <classes>
- <!--           <class name="Test" >
+           <!-- <class name="Test" >
                 <methods>
                     <include name="appiumTest3()" />
                     <include name="appiumTest4()" />
@@ -12,8 +12,9 @@
             </class>
 
             <class name="drivers.ScrollDemo" />
-            <class name="drivers.LongPressTest" />-->
-            <class name="drivers.SwipeDemo" />
+            <class name="drivers.LongPressTest" />
+            <class name="drivers.SwipeDemo" />-->
+            <class name="drivers.DragDropDemo" />
 
         </classes>
     </test>

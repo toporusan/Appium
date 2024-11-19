@@ -35,14 +35,14 @@ public class AndroidDriverClass {
 
 
     // Home
-//    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-//    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-//    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
+    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
 
     // Mac
-    String mainJsPathWindows = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
-    String deviceName = "emulator-5554";
-    String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
+    //String mainJsPathWindows = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
+    //String deviceName = "emulator-5554";
+    //String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
 
     // Work
     //String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
@@ -184,12 +184,12 @@ public class AndroidDriverClass {
         int height = size.getHeight();
 
         // Использовать эти данные для свайпа
-        System.out.println("X: " + x + " Y: " + y);
-        System.out.println("Width: " + width + " Height: " + height);
+        System.out.println(" Координаты Х/У: "+"X: " + x + " Y: " + y);
+        System.out.println(" Ширина/высота: "+ "Width: " + width + " Height: " + height);
     }
 
     // Свайп посредством JavascriptExecutor
-    public void swipeToEllement (WebElement element, String direction,  int speed) {
+    public void swipeToEllement(WebElement element, String direction, int speed) {
         ((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) element).getId(),
                 "direction", direction,
