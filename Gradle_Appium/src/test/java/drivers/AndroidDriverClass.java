@@ -13,6 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.w3c.dom.events.EventListener;
 
 
 import java.io.File;
@@ -35,19 +36,20 @@ public class AndroidDriverClass {
 
 
     // Home
-    String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+    //String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    //String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
+    //String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
 
     // Mac
-    //String mainJsPathWindows = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
-    //String deviceName = "emulator-5554";
-    //String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
+    // String mainJsPathWindows = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
+    // String deviceName = "emulator-5554";
+    // String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
 
     // Work
-    //String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    //String deviceName = "emulator-5554";
-    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+    String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    String deviceName = "R39M202T1ZP";
+    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+
 
     String ipAddress = "127.0.0.1";
     int usingPort = 4723;
@@ -57,7 +59,7 @@ public class AndroidDriverClass {
         service = new AppiumServiceBuilder().withAppiumJS(new File(mainJsPathWindows))
                 .withIPAddress(ipAddress)
                 .usingPort(usingPort)
-                .withArgument(() -> "--log-level", "debug") // Устанавливаем уровень логирования на "warn"
+                .withArgument(() -> "--log-level", "warn") // Устанавливаем уровень логирования на "warn" * сноски внизу
                 .build();
         if (service.isRunning()) {
             service.stop();
@@ -67,24 +69,10 @@ public class AndroidDriverClass {
         System.out.println("@BeforeClass: Начал работу appium server");
     }
 
-    /*
-       --log-level" — это аргумент командной строки, который задает уровень логирования
-    при запуске Appium сервера.
-    Возможные значения для этого аргумента:
-    "debug" — выводит все сообщения (включая отладочные).
-    "info" — выводит общую информацию (по умолчанию).
-    "warn" — выводит только предупреждения и ошибки.
-    "error" — выводит только ошибки.
-
-    "warn" — это значение аргумента, которое определяет,
-    что Appium будет выводить только предупреждения и ошибки в
-    консоль, минимизируя вывод лишней информации (например, успешные загрузки драйверов).
-    */
-
     @BeforeMethod
     public void initDriver() {
         try {
-            urlAppium = new URL("http://127.0.0.1:4723");
+            urlAppium = new URL("http://127.0.0.1:4723/");
 
             options = new UiAutomator2Options();
             options.setDeviceName(deviceName);
@@ -104,6 +92,7 @@ public class AndroidDriverClass {
         if (driver != null) {
             driver.quit(); // Завершение сессии драйвера
             System.out.println("@AfterMethod: Завершил работу android driver AndroidDriver");
+
         }
     }
 
@@ -113,27 +102,10 @@ public class AndroidDriverClass {
             service.stop();
             System.out.println("@AfterClass: Завершил работу stopAppiumDriverLocalService +");
         }
+
     }
 
-    // ПОЛЬЗОВАТЕЛЬСКИЕ ЖЕСТЫ
-
-    /*
-    JavascriptExecutor — это интерфейс в WebDriver, который предоставляет возможность выполнять
-    произвольный JavaScript код внутри браузера (или мобильного приложения, если используется в Appium).
-    Этот интерфейс расширяет функциональность WebDriver, позволяя делать такие операции, которые не
-    поддерживаются стандартными методами WebDriver.
-
-    Основные методы интерфейса JavascriptExecutor:
-
-    1. executeScript(String script, Object... args):
-    Это основной метод интерфейса JavascriptExecutor.
-    Он выполняет синхронный JavaScript код и возвращает результат выполнения скрипта.
-
-    2. executeAsyncScript(String script, Object... args):
-    Этот метод выполняет асинхронный JavaScript код. Он полезен, когда нужно дождаться завершения
-     асинхронной операции, такой как загрузка данных, выполнение AJAX-запросов или других асинхронных
-     задач.
-    */
+    // ПОЛЬЗОВАТЕЛЬСКИЕ ЖЕСТЫ **
 
     // Долгий клик(зажатие)
     public void longClick_JavascriptExecutor(WebElement element, int duration) {
@@ -172,6 +144,7 @@ public class AndroidDriverClass {
                 ));
     }
 
+    // Найти координаты элемента и его длину/ширину
     public void findElementCoordination(WebElement element) {
         // Получить координаты
         Point location = element.getLocation();
@@ -184,8 +157,8 @@ public class AndroidDriverClass {
         int height = size.getHeight();
 
         // Использовать эти данные для свайпа
-        System.out.println(" Координаты Х/У: "+"X: " + x + " Y: " + y);
-        System.out.println(" Ширина/высота: "+ "Width: " + width + " Height: " + height);
+        System.out.println("Coordinate: " + "X: " + x + " Y: " + y);
+        System.out.println("Width: " + width + " Height: " + height);
     }
 
     // Свайп посредством JavascriptExecutor
@@ -227,9 +200,50 @@ public class AndroidDriverClass {
 
     }
 
+    public void dragDrop_JavascriptExecutor(WebElement element, int x, int y) {
+        ((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement) element).getId(),
+                "speed", 3500, // можно опционалоно
+                "endX", x,
+                "endY", y
+        ));
+    }
+
+
 }
 
 
 
 
+  /*
+       --log-level" — это аргумент командной строки, который задает уровень логирования
+    при запуске Appium сервера.
+    Возможные значения для этого аргумента:
+    "debug" — выводит все сообщения (включая отладочные).
+    "info" — выводит общую информацию (по умолчанию).
+    "warn" — выводит только предупреждения и ошибки.
+    "error" — выводит только ошибки.
 
+    "warn" — это значение аргумента, которое определяет,
+    что Appium будет выводить только предупреждения и ошибки в
+    консоль, минимизируя вывод лишней информации (например, успешные загрузки драйверов).
+    */
+
+
+    /*
+    JavascriptExecutor — это интерфейс в WebDriver, который предоставляет возможность выполнять
+    произвольный JavaScript код внутри браузера (или мобильного приложения, если используется в Appium).
+    Этот интерфейс расширяет функциональность WebDriver, позволяя делать такие операции, которые не
+    поддерживаются стандартными методами WebDriver.
+
+    Основные методы интерфейса JavascriptExecutor:
+
+    1. executeScript(String script, Object... args):
+    Это основной метод интерфейса JavascriptExecutor.
+    Он выполняет синхронный JavaScript код и возвращает результат выполнения скрипта.
+
+    2. executeAsyncScript(String script, Object... args):
+    Этот метод выполняет асинхронный JavaScript код. Он полезен, когда нужно дождаться завершения
+     асинхронной операции, такой как загрузка данных, выполнение AJAX-запросов или других асинхронных
+     задач.
+    */
