@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8ed2945-7746-4fce-94b2-ce18c7e1b30b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Appium inspector cred.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gradle_Appium/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gradle_Appium/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Gradle_Appium/src/test/java/drivers/AndroidDriverClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gradle_Appium/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Gradle_Appium/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gradle_Appium/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Gradle_Appium/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gradle_Appium/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/Gradle_Appium/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gradle_Appium/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/Gradle_Appium/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gradle_Appium/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Gradle_Appium/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gradle_Appium/src/test/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/Gradle_Appium/src/test/java/Test.java" afterDir="false" />
-    </list>
+    <list default="true" id="e8ed2945-7746-4fce-94b2-ce18c7e1b30b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +49,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/v.sultanov/0_D_Disk/Projects/Appium/Gradle_Appium",
     "node.js.detected.package.eslint": "true",
@@ -100,8 +89,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.227" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.227" />
       </set>
     </attachedChunks>
   </component>
@@ -118,6 +107,7 @@
       <workItem from="1729763005466" duration="4630000" />
       <workItem from="1730353826114" duration="574000" />
       <workItem from="1730723941790" duration="41000" />
+      <workItem from="1732294713850" duration="17000" />
     </task>
     <servers />
   </component>

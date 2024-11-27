@@ -2,9 +2,11 @@ package drivers;
 
 import com.google.common.collect.ImmutableMap;
 
+import org.openqa.selenium.DeviceRotation;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,22 +35,27 @@ public class AndroidDriverClass {
     public UiAutomator2Options options; // UiAutomator2Options конфигуратор
     public AndroidDriver driver; // AndroidDriver драйвер
     public URL urlAppium;
+    enum ScreenOrient {
+        LANDSCAPE1,LANDSCAPE2, PORTRAIT1,PORTRAIT2
+    }
+
 
 
     // Home
-    //String mainJsPathWindows = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    //String deviceName = "Pixel_3a_API_35_extension_level_13_x86_64";
-    //String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+    String mainJsPath = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    String deviceName = "emulator-5554";
+    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+
 
     // Mac
-    // String mainJsPathWindows = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
+    // String mainJsPath = "/opt/homebrew/lib/node_modules/appium/build/lib/main.js";
     // String deviceName = "emulator-5554";
     // String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
 
     // Work
-    String mainJsPathWindows = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String deviceName = "R39M202T1ZP";
-    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+    //String mainJsPath = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    //String deviceName = "R39M202T1ZP";
+    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
 
 
     String ipAddress = "127.0.0.1";
@@ -56,9 +63,10 @@ public class AndroidDriverClass {
 
     @BeforeClass
     public void configureDriver() {
-        service = new AppiumServiceBuilder().withAppiumJS(new File(mainJsPathWindows))
+        service = new AppiumServiceBuilder().withAppiumJS(new File(mainJsPath))
                 .withIPAddress(ipAddress)
                 .usingPort(usingPort)
+                .withArgument(() -> "--allow-cors")
                 .withArgument(() -> "--log-level", "warn") // Устанавливаем уровень логирования на "warn" * сноски внизу
                 .build();
         if (service.isRunning()) {
@@ -81,6 +89,7 @@ public class AndroidDriverClass {
 
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.rotate(ScreenOrientation.PORTRAIT);
             System.out.println("@BeforeMethod: Начал работу android driver UiAutomator2Options");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
@@ -90,6 +99,7 @@ public class AndroidDriverClass {
     @AfterMethod
     public void stopDriver() {
         if (driver != null) {
+            driver.rotate(ScreenOrientation.PORTRAIT);
             driver.quit(); // Завершение сессии драйвера
             System.out.println("@AfterMethod: Завершил работу android driver AndroidDriver");
 
@@ -207,6 +217,26 @@ public class AndroidDriverClass {
                 "endX", x,
                 "endY", y
         ));
+    }
+
+
+    public void screenOrientation(ScreenOrient s) {
+        switch (s) {
+            case LANDSCAPE1 -> {
+                driver.rotate(ScreenOrientation.LANDSCAPE);
+            }
+            case LANDSCAPE2 -> {
+                driver.rotate(new DeviceRotation(0,0,90));
+            }
+            case PORTRAIT1 -> {
+                driver.rotate(ScreenOrientation.PORTRAIT);
+            }
+            case PORTRAIT2 -> {
+                driver.rotate(new DeviceRotation(0,0,0));
+            }
+        }
+
+
     }
 
 
