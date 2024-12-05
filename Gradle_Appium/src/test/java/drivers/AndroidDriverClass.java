@@ -45,6 +45,7 @@ public class AndroidDriverClass {
     //String mainJsPath = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
     //String deviceName = "emulator-5554";
     //String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+    //String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
 
 
     // Mac
@@ -55,7 +56,8 @@ public class AndroidDriverClass {
     // Work
     String mainJsPath = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
     String deviceName = "R39M202T1ZP";
-    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\General-Store.apk";
 
 
     String ipAddress = "127.0.0.1";
