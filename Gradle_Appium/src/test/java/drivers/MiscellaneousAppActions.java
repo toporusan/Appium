@@ -1,20 +1,24 @@
 package drivers;
 
+import com.google.common.collect.ImmutableMap;
+
 import org.openqa.selenium.DeviceRotation;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.android.Activity;
 
 public class MiscellaneousAppActions extends AndroidDriverClass {
 
     @Test
     public void miscellaneousAppActions() {
-        WebElement el4 = driver.findElement(AppiumBy.accessibilityId("Preference"));
-        el4.click();
-        WebElement el5 = driver.findElement(AppiumBy.accessibilityId("3. Preference dependencies"));
-        el5.click();
+
+
+        startActivity("io.appium.android.apis","io.appium.android.apis.preference.PreferenceDependencies");
+
         WebElement el6 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"android:id/checkbox\")"));
         el6.click();
         screenOrientation(ScreenOrient.LANDSCAPE2);

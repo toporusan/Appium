@@ -35,16 +35,16 @@ public class AndroidDriverClass {
     public UiAutomator2Options options; // UiAutomator2Options конфигуратор
     public AndroidDriver driver; // AndroidDriver драйвер
     public URL urlAppium;
+
     enum ScreenOrient {
-        LANDSCAPE1,LANDSCAPE2, PORTRAIT1,PORTRAIT2
+        LANDSCAPE1, LANDSCAPE2, PORTRAIT1, PORTRAIT2
     }
 
 
-
     // Home
-    String mainJsPath = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String deviceName = "emulator-5554";
-    String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
+    //String mainJsPath = "C:\\Users\\sulta\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    //String deviceName = "emulator-5554";
+    //String setApp = "D:\\androidLessons\\Appium\\ApiDemos-debug.apk";
 
 
     // Mac
@@ -53,9 +53,9 @@ public class AndroidDriverClass {
     // String setApp = "/Users/Toporusan/Projects/Appium/ApiDemos-debug.apk";
 
     // Work
-    //String mainJsPath = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    //String deviceName = "R39M202T1ZP";
-    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
+    String mainJsPath = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
+    String deviceName = "R39M202T1ZP";
+    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
 
 
     String ipAddress = "127.0.0.1";
@@ -226,13 +226,13 @@ public class AndroidDriverClass {
                 driver.rotate(ScreenOrientation.LANDSCAPE);
             }
             case LANDSCAPE2 -> {
-                driver.rotate(new DeviceRotation(0,0,90));
+                driver.rotate(new DeviceRotation(0, 0, 90));
             }
             case PORTRAIT1 -> {
                 driver.rotate(ScreenOrientation.PORTRAIT);
             }
             case PORTRAIT2 -> {
-                driver.rotate(new DeviceRotation(0,0,0));
+                driver.rotate(new DeviceRotation(0, 0, 0));
             }
         }
 
@@ -240,7 +240,31 @@ public class AndroidDriverClass {
     }
 
 
+
+
+    // Старт с конкретной активити , осткрыть сразу нужный экран напрямую
+
+     /*
+    Команда для терминала(command line) для определения на экнана и пэккейдж приложения,
+    необходимо навестись на конкретный экран, а затем ввести команду:
+
+    -для mac/linux
+    adb shell dumpsys window | grep -E 'mCurrentFocus'
+    -для windows
+    adb shell dumpsys window | find "mCurrentFocus"
+     */
+
+    public void startActivity(String packageName, String activityName) {
+
+        ((JavascriptExecutor) driver).executeScript("mobile: startActivity",
+                ImmutableMap.of("intent", packageName + "/" + activityName));
+    }
+
+
 }
+
+
+
 
 
 
