@@ -91,7 +91,7 @@ public class AndroidDriverClass {
 
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.rotate(ScreenOrientation.PORTRAIT);
+            //driver.rotate(ScreenOrientation.PORTRAIT);
             System.out.println("@BeforeMethod: Начал работу android driver UiAutomator2Options");
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
@@ -101,7 +101,7 @@ public class AndroidDriverClass {
     @AfterMethod
     public void stopDriver() {
         if (driver != null) {
-            driver.rotate(ScreenOrientation.PORTRAIT);
+            //driver.rotate(ScreenOrientation.PORTRAIT);
             driver.quit(); // Завершение сессии драйвера
             System.out.println("@AfterMethod: Завершил работу android driver AndroidDriver");
 

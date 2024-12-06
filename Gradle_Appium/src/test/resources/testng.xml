@@ -4,18 +4,19 @@
 <suite name="All Test Suite">
     <test name="C:/Users/v.sultanov/0_D_Disk/Projects/untitled" preserve-order="true" verbose="2">
         <classes>
-            <!-- <class name="Test" >
+             <!--<class name="Test" >
                   <methods>
                       <include name="appiumTest3()" />
                       <include name="appiumTest4()" />
                   </methods>
-              </class>
+              </class>-->
 
-              <class name="drivers.ScrollDemo" />
-              <class name="drivers.LongPressTest" />
-              <class name="drivers.SwipeDemo" />-->
+             <!-- <class name="drivers.ScrollDemo" />-->
+             <!-- <class name="drivers.LongPressTest" />-->
+              <!--<class name="drivers.SwipeDemo" />-->
             <!--<class name="drivers.DragDropDemo" />-->
-            <class name="drivers.MiscellaneousAppActions" />
+            <!--<class name="drivers.MiscellaneousAppActions" />-->
+            <class name="eCommerce_tc1" />
 
         </classes>
     </test>
