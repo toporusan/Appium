@@ -6,6 +6,12 @@
   "appium:app": "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk"
 }
 
+{
+  "platformName": "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:deviceName": "emulator-5554",
+  "appium:app": "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\General-Store.apk"
+}
 
 Для запуска сервера 
 	

@@ -132,10 +132,8 @@ public class AndroidDriverClass {
     public WebElement scrollToElementByText(String text) {
         // Формируем строку для прокрутки до элемента с заданным текстом
         String uiScrollableString = String.format("new UiScrollable(new UiSelector()).scrollIntoView(text(\"%s\"))", text);
-
         // Прокручиваем экран до нужного элемента
         driver.findElement(AppiumBy.androidUIAutomator(uiScrollableString));
-
         // Теперь ждем, пока элемент появится на экране
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return wait.until(ExpectedConditions.presenceOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector().text(\"" + text + "\")")));
@@ -238,26 +236,20 @@ public class AndroidDriverClass {
             }
         }
 
-
     }
-
-
-
 
     // Старт с конкретной активити , осткрыть сразу нужный экран напрямую
 
      /*
-    Команда для терминала(command line) для определения на экнана и пэккейдж приложения,
-    необходимо навестись на конкретный экран, а затем ввести команду:
 
-    -для mac/linux
-    adb shell dumpsys window | grep -E 'mCurrentFocus'
-    -для windows
-    adb shell dumpsys window | find "mCurrentFocus"
      */
 
-    public void startActivity(String packageName, String activityName) {
+    /* не получится использовать т.к. данный метод deprecated
+    Activity activity = new Activity();
+    driver.startActivity(activity);
+    */
 
+    public void startActivity(String packageName, String activityName) {
         ((JavascriptExecutor) driver).executeScript("mobile: startActivity",
                 ImmutableMap.of("intent", packageName + "/" + activityName));
     }

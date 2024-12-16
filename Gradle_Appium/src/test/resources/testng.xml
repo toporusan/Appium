@@ -16,7 +16,7 @@
               <!--<class name="drivers.SwipeDemo" />-->
             <!--<class name="drivers.DragDropDemo" />-->
             <!--<class name="drivers.MiscellaneousAppActions" />-->
-            <class name="eCommerce_tc1" />
+            <class name="drivers.eCommerce_tc1" />
 
         </classes>
     </test>

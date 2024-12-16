@@ -16,9 +16,8 @@ public class MiscellaneousAppActions extends AndroidDriverClass {
     @Test
     public void miscellaneousAppActions() {
 
-
+        // начал работу с конкретного экрана
         startActivity("io.appium.android.apis","io.appium.android.apis.preference.PreferenceDependencies");
-
         WebElement el6 = driver.findElement(AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"android:id/checkbox\")"));
         el6.click();
         screenOrientation(ScreenOrient.LANDSCAPE2);
