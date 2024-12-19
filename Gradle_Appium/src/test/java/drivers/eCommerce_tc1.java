@@ -4,6 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.Base64;
+
+import javax.imageio.ImageIO;
+
 import drivers.AndroidDriverClass;
 import io.appium.java_client.AppiumBy;
 
@@ -24,4 +34,6 @@ public class eCommerce_tc1 extends AndroidDriverClass {
         scroll_JavascriptExecutor("down",50,200,200);
 
     }
+
+
 }
