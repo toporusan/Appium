@@ -56,8 +56,7 @@ public class AndroidDriverClass {
     // Work
     String mainJsPath = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
     String deviceName = "R39M202T1ZP";
-    //String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\ApiDemos-debug.apk";
-    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\General-Store.apk";
+    String setApp = "C:\\Users\\v.sultanov\\0_D_Disk\\Projects\\Appium\\Anorbank.apk";
 
 
     String ipAddress = "127.0.0.1";
@@ -88,6 +87,8 @@ public class AndroidDriverClass {
             options.setDeviceName(deviceName);
             options.setApp(setApp);
             options.setAutomationName("UiAutomator2");
+            options.setNoReset(true);   // Сохранять данные приложения
+            options.setFullReset(false); // Не сбрасывать приложение
 
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -241,7 +242,13 @@ public class AndroidDriverClass {
     // Старт с конкретной активити , осткрыть сразу нужный экран напрямую
 
      /*
+    Команда для терминала(command line) для определения activityName и package ,
+    необходимо навестись на конкретный экран, а затем ввести команду:
 
+    -для mac/linux
+    adb shell dumpsys window | grep -E 'mCurrentFocus'
+    -для windows
+    adb shell dumpsys window | find "mCurrentFocus"
      */
 
     /* не получится использовать т.к. данный метод deprecated
