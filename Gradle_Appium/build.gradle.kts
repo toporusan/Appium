@@ -18,6 +18,7 @@ dependencies {
     testImplementation("org.testng:testng:7.10.2")
     implementation("io.appium:java-client:9.3.0")
     implementation("org.seleniumhq.selenium:selenium-java:4.26.0")
+    implementation ("com.google.code.gson:gson:2.10.1")
 
 }
 

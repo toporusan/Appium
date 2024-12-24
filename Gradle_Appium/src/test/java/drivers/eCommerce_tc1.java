@@ -1,6 +1,11 @@
 package drivers;
 
+
+
+import com.google.common.collect.ImmutableMap;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -11,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Base64;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
@@ -33,8 +40,6 @@ public class eCommerce_tc1 extends AndroidDriverClass {
         /*scrollToElementByText("Nigeria");*/
         scroll_JavascriptExecutor("down",50,200,200);
 
-
     }
-
 
 }
