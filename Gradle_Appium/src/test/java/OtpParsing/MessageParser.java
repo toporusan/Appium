@@ -57,7 +57,9 @@ public class MessageParser {
     public MessageDTO parseMessage(String input) {
         // Регулярное выражение для извлечения ключ-значение
         Pattern pattern = Pattern.compile("(\\w+)=([^,]+|NULL)");
+        Pattern pattern2 = Pattern.compile("body=.+, locked");
         Matcher matcher = pattern.matcher(input);
+        Matcher matcher2 = pattern2.matcher(input);
 
         Map<String, String> map = new HashMap<>();
 
@@ -67,6 +69,12 @@ public class MessageParser {
             String value = matcher.group(2).equals("NULL") ? null : matcher.group(2);
             map.put(key, value);
         }
+        while (matcher.find()) {
+            String key = matcher.group(1);
+            String value = matcher.group(2).equals("NULL") ? null : matcher.group(2);
+            map.put(key, value);
+        }
+
 
         // Создание и заполнение объекта Message
         MessageDTO message = new MessageDTO();
@@ -123,5 +131,6 @@ public class MessageParser {
         System.out.println(message.getRow());
         System.out.println(message.get_id());
         System.out.println(message.getBody());
+        System.out.println(message. getAddress());
     }
 }
