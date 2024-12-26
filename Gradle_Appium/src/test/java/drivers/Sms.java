@@ -14,7 +14,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -38,7 +40,8 @@ public class Sms {
     public URL urlAppium;
 
     String mainJsPath = "C:\\Users\\v.sultanov\\AppData\\Roaming\\npm\\node_modules\\appium\\build\\lib\\main.js";
-    String deviceName = "R39M202T1ZP";
+    //String deviceName = "R39M202T1ZP"; // Xiaomi Redmi Note 11
+    String deviceName = "R5CW329XFCW"; // Samsung Galaxy flip
 
 
     String ipAddress = "127.0.0.1";
@@ -70,8 +73,8 @@ public class Sms {
             options.setAutomationName("UiAutomator2");
             options.setNoReset(true);   // Сохранять данные приложения
             options.setFullReset(false); // Не сбрасывать приложение
-            options.setAppPackage("com.android.mms");
-            options.setAppActivity("com.android.mms.ui.SingleRecipientConversationActivity");
+            //options.setAppPackage("com.android.mms");
+            //options.setAppActivity("com.android.mms.ui.SingleRecipientConversationActivity");
 
 
             driver = new AndroidDriver(urlAppium, options); // Инициализируем драйвер
@@ -104,18 +107,100 @@ public class Sms {
 
     @Test
     public void fetchSMS() {
-        Object obj = ((JavascriptExecutor) driver).executeScript("mobile:listSms", ImmutableMap.of(
-                "max", "4"));
-        String json = obj.toString();
+/*        Object obj = ((JavascriptExecutor) driver).executeScript("mobile:listSms", ImmutableMap.of(
+                "max", "1"));
+        String json = obj.toString();*/
         /*System.out.println(json);*/
 
-        String jsonString = json.replaceAll("[\\r\\n\\<\\#\\>\\*]+", " ").replace("\"", "\\\"");
-        System.out.println(jsonString);
+        // String jsonString = json.replaceAll("[\\r\\n\\<\\#\\>\\*]+", " ").replace("\"", "\\\"");
+   /*     if (jsonString.contains("")) {
+            jsonString = jsonString.substring(jsonString.indexOf("["));
+        }*/
+        // System.out.println(jsonString);
 
-        Gson gson = new Gson();
+/*        Gson gson = new Gson();
         Response response = gson.fromJson(jsonString, Response.class);
-        System.out.println(response.items.get(1).body);
+        System.out.println(response.items.get(1).body);*/
+
+        try {
+            // Команда для получения списка SMS через ADB
+            String adbCommand = "adb shell content query --uri content://sms";
+
+            // Запуск команды через ProcessBuilder
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command("cmd", "/c", adbCommand); // Для Windows замените "bash" на "cmd" и используйте "/c" вместо "-c"
+            Process process = processBuilder.start();
+
+            // Чтение результата выполнения команды
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+
+            // Ожидание завершения процесса
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                System.out.println("Список SMS получен успешно:");
+                System.out.println(output);
+            } else {
+                System.err.println("Ошибка при выполнении команды ADB");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+
+        StringBuilder output = new StringBuilder();
+
+        try {
+            // Команда для получения списка SMS через ADB
+            String adbCommand = "adb shell content query --uri content://sms/inbox";
+
+            // Запуск команды через ProcessBuilder
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            processBuilder.command("cmd", "/c", adbCommand); // Для Windows замените "bash" на "cmd" и используйте "/c" вместо "-c"
+            Process process = processBuilder.start();
+
+            // Чтение результата выполнения команды
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+
+            // Ожидание завершения процесса
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                System.out.println("Список SMS получен успешно:");
+            } else {
+                System.err.println("Ошибка при выполнении команды ADB");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String a = output.toString();
+
+        String[] rows = a.split("(?=Row:)");
+
+        // Создаём список для хранения частей
+        List<String> rowList = new ArrayList<>();
+        for (String row : rows) {
+            rowList.add(row.trim()); // Удаляем лишние пробелы
+        }
+        System.out.println(rowList.get(1));
 
 
     }
+
+
+
+
+
+
 }
