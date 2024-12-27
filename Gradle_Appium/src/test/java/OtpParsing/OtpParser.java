@@ -8,8 +8,9 @@ import java.util.regex.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageParser {
+public class OtpParser {
 
+    // Метод для получения списка SMS через ADB
     public List<String> smsList() {
         StringBuilder output = new StringBuilder();
 
@@ -54,31 +55,33 @@ public class MessageParser {
         return rowList;
     }
 
-    public MessageDTO parseMessage(String input) {
+    // Метод для парсинга строки в объект MessageDTO
+    public SmsDTO parseMessage(String input) {
         // Регулярное выражение для извлечения ключ-значение
         Pattern pattern = Pattern.compile("(\\w+)=([^,]+|NULL)");
-        Pattern pattern2 = Pattern.compile("body=.+, locked");
         Matcher matcher = pattern.matcher(input);
-        Matcher matcher2 = pattern2.matcher(input);
 
         Map<String, String> map = new HashMap<>();
-
         // Проходим по всем совпадениям и сохраняем в Map
         while (matcher.find()) {
             String key = matcher.group(1);
             String value = matcher.group(2).equals("NULL") ? null : matcher.group(2);
             map.put(key, value);
         }
-        while (matcher.find()) {
-            String key = matcher.group(1);
-            String value = matcher.group(2).equals("NULL") ? null : matcher.group(2);
-            map.put(key, value);
+
+        Pattern pattern2 = Pattern.compile("(body)=(.+, locked)");
+        Matcher matcher2 = pattern2.matcher(input);
+
+        Map<String, String> map2 = new HashMap<>();
+        while (matcher2.find()) {
+            String key = matcher2.group(1);
+            String value = matcher2.group(2).equals("NULL") ? null : matcher2.group(2);
+            map2.put(key, value.substring(0, value.length() - 8));
         }
 
 
         // Создание и заполнение объекта Message
-        MessageDTO message = new MessageDTO();
-
+        SmsDTO message = new SmsDTO();
         message.setRow(Integer.parseInt(map.getOrDefault("Row", "0")));
         message.set_id(Integer.parseInt(map.getOrDefault("_id", "0")));
         message.setThread_id(Integer.parseInt(map.getOrDefault("thread_id", "0")));
@@ -92,7 +95,7 @@ public class MessageParser {
         message.setType(Integer.parseInt(map.getOrDefault("type", "0")));
         message.setReply_path_present(Integer.parseInt(map.getOrDefault("reply_path_present", "0")));
         message.setSubject(map.get("subject"));
-        message.setBody(map.get("body"));
+        message.setBody(map2.get("body"));
         message.setService_center(map.get("service_center"));
         message.setLocked(Integer.parseInt(map.getOrDefault("locked", "0")));
         message.setError_code(Integer.parseInt(map.getOrDefault("error_code", "0")));
@@ -122,15 +125,120 @@ public class MessageParser {
         return message;
     }
 
+
+    //  Возвращает OTP из строки
+    public String getOTP(String input, int otpLength) {
+
+        // Проверяем на null или пустую строку
+        if (input == null || input.trim().isEmpty()) {
+            return "Строка пуста или null";
+        }
+
+        Pattern pattern = Pattern.compile("(?<!\\d)\\d{6}(?!\\d)");
+        Matcher matcher = pattern.matcher(input);
+        String otp = "";
+
+        while (matcher.find()) {
+            otp = matcher.group();
+        }
+
+        // Если OTP не найден, возвращаем сообщение
+        if (otp.isEmpty()) {
+            return "OTP не найден";
+        }
+
+        return otp;
+    }
+
+    // Возвращает список OTP из всех SMS от определенного отправителя
+    public List<String> getOTPListBySender(String otpSenderName, List<SmsDTO> rowList) {
+
+        List<String> allOtps = new ArrayList<>();
+
+        // Проверяем, чтобы список сообщений не был пустым
+        if (rowList == null || rowList.isEmpty()) {
+            System.out.println("Список сообщений пуст или null.");
+            return allOtps;
+        }
+
+        // Проверяем, чтобы имя отправителя было не null
+        if (otpSenderName == null || otpSenderName.isEmpty()) {
+            System.out.println("Имя отправителя пустое или null.");
+            return allOtps;
+        }
+
+        // Проходим по каждому сообщению
+        for (SmsDTO message : rowList) {
+
+            if (message == null || message.getBody() == null || message.getAddress() == null) {
+                continue; // Пропустить эту итерацию, перейти к следующему сообщению если сообщение или тело сообщения или адрес отправителя пустые
+            }
+
+            // Получаем текст сообщения
+            String body = message.getBody();
+
+            // Регулярное выражение для поиска шестизначных чисел
+            Pattern pattern = Pattern.compile("(?<!\\d)\\d{6}(?!\\d)");
+            Matcher matcher = pattern.matcher(body);
+
+            // Ищем все подходящие совпадения
+            while (matcher.find()) {
+                // Проверяем, совпадает ли отправитель
+                if (message.getAddress().equals(otpSenderName)) {
+                    allOtps.add(matcher.group());
+                }
+            }
+        }
+
+        return allOtps;
+    }
+
+    public String getOTP2(String input, int otpLength, String customRegex) {
+
+        // Проверяем на null или пустую строку
+        if (input == null || input.trim().isEmpty()) {
+            return "Строка пуста или null";
+        }
+
+        // Используем пользовательский regex или создаем стандартный
+        String regex = (customRegex != null && !customRegex.isEmpty())
+                ? customRegex
+                : "(?<!\\d)\\d{" + otpLength + "}(?!\\d)";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        String otp = "";
+
+        while (matcher.find()) {
+            otp = matcher.group();
+        }
+
+        // Если OTP не найден, возвращаем сообщение
+        if (otp.isEmpty()) {
+            return "OTP не найден";
+        }
+
+        return otp;
+    }
+
+
     public static void main(String[] args) {
 
-        List <String> rowList = new MessageParser().smsList();
-        String input = rowList.get(5);
+        OtpParser messageParser = new OtpParser();
 
-        MessageDTO message = new MessageParser().parseMessage(input);
-        System.out.println(message.getRow());
-        System.out.println(message.get_id());
-        System.out.println(message.getBody());
-        System.out.println(message. getAddress());
+        List<String> sms = messageParser.smsList();
+
+        List<SmsDTO> rowList = new ArrayList<>();
+        for (String row : sms) {
+            rowList.add(messageParser.parseMessage(row));
+        }
+
+
+        System.out.println("-------------------------------------------------");
+
+
+
+
     }
 }
+

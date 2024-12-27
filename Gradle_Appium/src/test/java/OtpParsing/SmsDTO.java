@@ -1,6 +1,6 @@
 package OtpParsing;
 
-public class MessageDTO {
+public class SmsDTO {
     private int row;
     private int _id;
     private int thread_id;
@@ -361,7 +361,7 @@ public class MessageDTO {
 
     @Override
     public String toString() {
-        return "Message{" +
+        return
                 "row=" + row +
                 ", _id=" + _id +
                 ", thread_id=" + thread_id +
